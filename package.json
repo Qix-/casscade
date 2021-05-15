@@ -2,7 +2,7 @@
 	"name": "@qix/casscade",
 	"private": true,
 	"version": "0.0.0",
-	"license": "PROPRIETARY",
+	"license": "MIT",
 	"scripts": {
 		"format": "prettier --write .",
 		"format:staged": "pretty-quick --staged",
