@@ -30,19 +30,21 @@ For example, to position `#lower` below `#upper` with 5 pixels of vertical
 gap and align their horizontal centers, one might write the following styles:
 
 ```css
-#parent > #upper {
-	--name: upper;
-}
-#parent > #lower {
-	--name: lower;
-}
+#parent > #upper { --name: upper; }
+#parent > #lower { --name: lower; }
 
 #parent {
 	display: layout(casscade);
+
 	--rule:
-		/* baseline positioning */ upper.L == 0, upper.T == 0,
-		/* vertical positioning */ lower.T == upper.B + 5, /* align centers */
-			lower.C == upper.C;
+		/* baseline positioning */
+		upper.L == 0, upper.T == 0,
+
+		/* vertical positioning */
+		lower.T == upper.B + 5,
+
+		/* align centers */
+		lower.C == upper.C;
 }
 ```
 
