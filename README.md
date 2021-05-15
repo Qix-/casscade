@@ -48,6 +48,10 @@ gap and align their horizontal centers, one might write the following styles:
 }
 ```
 
+The example in this repository should render like the following:
+
+![four boxes stacked on top of each other with their horzontal centers aligned](screenshot.png)
+
 ## Building
 
 Clone, `npm i` and then `npm run build`. Serve with your favorite static
