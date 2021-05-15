@@ -26,7 +26,7 @@ const SYMBOL_MAP = new Map(
 	].map(s => [s.description, s])
 );
 
-const NAME_PATTERN = /^[a-z_-]+$/;
+const NAME_PATTERN = /^[a-z_]+$/;
 const isValidName = n => Boolean(n.match(NAME_PATTERN));
 
 const guideline = kiwi.Strength.create(0.0, 0.0, 0.5);

@@ -33,11 +33,25 @@ muldiv_expression
 	= root:addsub_expression ops:(WS op:[*/] WS t:addsub_expression { return [op, t] })*
 	{
 		let cur = root;
+
 		for (const [op, t] of ops) {
-			cur = (op === '*')
-				? cur.multiply(t)
-				: cur.divide(t);
+			if (typeof cur === 'number') {
+				if (typeof t === 'number') {
+					cur = (op === '*')
+						? cur * t
+						: cur / t;
+				} else if (op === '*') {
+					cur = t.multiply(cur);
+				} else {
+					throw new Error('cannot divide by non-constant term');
+				}
+			} else {
+				cur = (op === '*')
+					? cur.multiply(t)
+					: cur.divide(t);
+			}
 		}
+
 		return cur;
 	}
 	;
@@ -46,11 +60,25 @@ addsub_expression
 	= root:term ops:(WS op:[+-] WS t:term { return [op, t] })*
 	{
 		let cur = root;
+
 		for (const [op, t] of ops) {
-			cur = (op === '+')
-				? cur.plus(t)
-				: cur.minus(t);
+			if (typeof cur === 'number') {
+				if (typeof t === 'number') {
+					cur = (op === '+')
+						? cur + t
+						: cur - t;
+				} else {
+					cur = (op === '+')
+						? t.plus(cur)
+						: t.multiply(-1).plus(cur);
+				}
+			} else {
+				cur = (op === '+')
+					? cur.plus(t)
+					: cur.minus(t);
+			}
 		}
+
 		return cur;
 	}
 	;
@@ -87,8 +115,8 @@ variable_term
 	;
 
 number_term
-	= i:$([0-9]+ "." [0-9]+) { return parseFloat(i) }
-	/ i:$([0-9]+) { return parseInt(i, 10) }
+	= i:$("-"? [0-9]+ "." [0-9]+) { return parseFloat(i) }
+	/ i:$("-"? [0-9]+) { return parseInt(i, 10) }
 	;
 
 op
@@ -118,7 +146,7 @@ SYM
 	;
 
 ID
-	= $[a-z_-]+
+	= $[a-z_]+
 	;
 
 WS

@@ -17,19 +17,22 @@
 		left: 20rem;
 		top: 5rem;
 
+		--size: 30;
+		--gap: 5;
+
 		/* prettier-ignore */
 		--rule:
-			a.W == 30, a.L == 0, a.T == 0,
-			b.W == 50, b.C == a.C,
-			c.W == 70, c.C == b.C,
-			d.W == 90, d.C == c.C,
+			a.W == var(--size), a.L == 0, a.T == 0,
+			b.W == var(--size) * 2, b.C == a.C,
+			c.W == var(--size) * 3, c.C == b.C,
+			d.W == var(--size) * 4, d.C == c.C,
 			a.W == a.H,
 			b.W == b.H,
 			c.W == c.H,
 			d.W == d.H,
-			d.T == c.B + 5,
-			c.T == b.B + 5,
-			b.T == a.B + 5;
+			d.T == c.B + var(--gap),
+			c.T == b.B + var(--gap),
+			b.T == a.B + var(--gap);
 	}
 
 	div {
