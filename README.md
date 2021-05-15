@@ -1,6 +1,6 @@
 # Casscade - (Experimental) Cassowary constraint-based layouts using Houdini CSS layout worklets
 
-This is **very, very experimental**, borderline **proof of concept** implementation of
+This is a **very, very experimental**, borderline **proof of concept** implementation of
 [Houdini layout worklets for CSS](https://github.com/w3c/css-houdini-drafts/blob/main/css-layout-api/EXPLAINER.md)
 that provide linear constraint solving for block containers with block children.
 
