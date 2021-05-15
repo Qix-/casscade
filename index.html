@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<style>
+	@property --name {
+		inherits: false;
+	}
+
+	@property --rule {
+		inerits: false;
+	}
+
+	main {
+		width: 500px;
+		height: 500px;
+
+		display: layout(casscade);
+		position: absolute;
+		left: 20rem;
+		top: 5rem;
+
+		/* prettier-ignore */
+		--rule:
+			a.W == 30, a.L == 0, a.T == 0,
+			b.W == 50, b.C == a.C,
+			c.W == 70, c.C == b.C,
+			d.W == 90, d.C == c.C,
+			a.W == a.H,
+			b.W == b.H,
+			c.W == c.H,
+			d.W == d.H,
+			d.T == c.B + 5,
+			c.T == b.B + 5,
+			b.T == a.B + 5;
+	}
+
+	div {
+		width: 200px;
+		height: 200px;
+		background-color: hotpink;
+	}
+
+	#A {
+		--name: a;
+	}
+	#B {
+		--name: b;
+	}
+	#C {
+		--name: c;
+	}
+	#D {
+		--name: d;
+	}
+</style>
+
+<main>
+	<div id="A">A</div>
+	<div id="B">B</div>
+	<div id="C">C</div>
+	<div id="D">D</div>
+</main>
+
+<script>
+	if ('layoutWorklet' in CSS) {
+		CSS.layoutWorklet
+			.addModule('./casscade.js')
+			.then(() => console.log('loaded cassowary layout'))
+			.catch(err =>
+				console.error('failed to load cassowary layout:', err)
+			);
+	} else {
+		document.write('No layout worklet available');
+	}
+</script>
